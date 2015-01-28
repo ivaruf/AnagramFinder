@@ -1,12 +1,8 @@
 package no.finn;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.nio.file.*;
+import java.util.*;
 
 public class AnagramFinder {
 
@@ -27,13 +23,11 @@ public class AnagramFinder {
 
     private static void addToMap(String word, HashMap<String, List<String>> anagramMap) {
         String key = sortWord(word);
-        List<String> strings = anagramMap.get(key);
-        if (strings == null) {
-            anagramMap.put(key, Arrays.asList(word));
+        List<String> anagrams = anagramMap.get(key);
+        if (anagrams == null) {
+            anagramMap.put(key, new ArrayList<>(Arrays.asList(word)));
         } else {
-            ArrayList<String> copy = new ArrayList<>(strings);
-            copy.add(word);
-            anagramMap.put(key, copy);
+            anagrams.add(word);
         }
     }
 
