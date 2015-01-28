@@ -11,12 +11,10 @@ import java.util.List;
 public class AnagramFinder {
 
     public static final String FILE_PATH = "src/main/resources/eventyr.txt";
-    private static HashMap<String, List<String>> anagramMap;
 
     public static void main(String... args) throws IOException {
-        anagramMap = new HashMap<>();
-
-        Files.lines(Paths.get(FILE_PATH)).forEach(AnagramFinder::addToMap);
+        final HashMap<String, List<String>> anagramMap = new HashMap<>();
+        Files.lines(Paths.get(FILE_PATH)).forEach(word -> addToMap(word, anagramMap));
         anagramMap.values().stream()
                 .filter(anagrams -> anagrams.size() > 1)
                 .forEach(AnagramFinder::print);
@@ -27,7 +25,7 @@ public class AnagramFinder {
         System.out.println("\n");
     }
 
-    private static void addToMap(String word) {
+    private static void addToMap(String word, HashMap<String, List<String>> anagramMap) {
         String key = sortWord(word);
         List<String> strings = anagramMap.get(key);
         if (strings == null) {
