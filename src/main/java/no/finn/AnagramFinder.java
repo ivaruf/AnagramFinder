@@ -31,7 +31,7 @@ public class AnagramFinder {
         }
     }
 
-    public static String sortWord(String word) {
+    protected static String sortWord(String word) {
         char[] chars = word.toLowerCase().toCharArray();
         Arrays.sort(chars);
         return new String(chars);
